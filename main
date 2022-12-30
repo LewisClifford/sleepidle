@@ -1,0 +1,24 @@
+from tkinter import Tk
+from tkinter import messagebox, Message
+from _tkinter import TclError
+from datetime import datetime
+import time
+import pyautogui
+import os
+import pyttsx3
+
+while True:
+    TIME_TO_WAIT = 10000 # in milliseconds
+    root = Tk() 
+    root.withdraw()
+    try:
+        root.after(TIME_TO_WAIT, root.destroy) 
+        result = messagebox.askquestion(title="Awake?", message="Are you awake?", master=root)
+        if result == "yes":
+            time.sleep(3)
+        else:
+            pyttsx3.speak("Shutting down computer in 10 seconds!")
+            os.system("shutdown /s /t 10")
+            break
+    except TclError:
+        pass
